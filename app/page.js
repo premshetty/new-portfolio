@@ -1,25 +1,34 @@
-import React from 'react'
+import axios from 'axios';
+import Home from '../components/Home/Home';
 
-const page = () => {
+const page = async () => {
+  let allData = [];
+  let url = 'https://swapi.dev/api/people/';
+
+  try {
+    while (url) {
+      const response = await axios.get(url);
+      const data = response.data;
+      const characters = data.results;
+
+      if (characters.length > 0) {
+        allData.push(characters);
+      }
+
+      url = data.next;
+    }
+  } catch (error) {
+    console.log('Error fetching characters:', error);
+  }
+
+  // Flatten the array of arrays into a single array
+  const flattenedData = allData.flat();
+
   return (
     <div>
-      <div className='h-[100vh] bg-blue-300 flex justify-center items-center snap-container'>
-        <div className='m-auto h-1/2  p-10 bg-white w-1/2'>
-          <div className='snap-element'> name</div>
-        </div>
-      </div>
-      <div className='h-[100vh] bg-blue-400 flex justify-center items-center snap-container'>
-        <div className='m-auto h-1/2  p-10 bg-white w-1/2'>
-          <div className='snap-element'> name</div>
-        </div>
-      </div>
-      <div className='h-[100vh] bg-blue-500 flex justify-center items-center snap-container'>
-        <div className='m-auto h-1/2  p-10 bg-white w-1/2'>
-          <div className='snap-element'> name</div>
-        </div>
-      </div>
+      <Home data={flattenedData} />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Coding Assignment
 
-## Getting Started
+In this assignment, you will be building a small front-end application that displays a filterable list of characters from the movie franchise Star Wars. You will be querying data from an open API called SWAPI (Star Wars API) that should give you access to all data that is needed to complete the assignment. If you are not familiar with Star Wars, don't worry, prior knowledge of the movies is not required to complete the assignment.
 
-First, run the development server:
+## App Overview
 
-```bash
-npm run dev
-# or
-yarn dev
+The app will consist of a main view that will display the list of characters and a filter section, where the user can filter the characters by certain criteria. Clicking on one of the characters from the list will open a detail view of this character. When the user changes the filter settings in the filter section, the list of characters should instantly adapt to only show characters that match the chosen filter settings.
+
+## Character List
+
+The character list should be a simple list that displays the name of the character. Each list entry should be clickable and open the detail view for the selected character when the user clicks the list entry.
+
+## Filter
+
+The filter section should allow the user to filter the list of characters according to the following filter settings:
+
+The movie the character appeared in (i.e. show only characters that appeared in Episode IV: A New Hope)
+The character's species (i.e. show only characters that are human)
+A range of years that the character's birth year falls in (i.e. show only characters born between 30 BBY and 5 ABY, see API documentation for field birth_year at [SWAPI Documentation](https://swapi.dev/))
+All filter settings should be treated using an AND relationship, i.e. if the user chooses to filter by movie and species, only characters that appear in the given movie AND are of the specified species should be displayed.
+
+## Character Details
+
+The character details that are shown when the user selects a character from the character list should show a brief summary of the character, including the name of the character, the movie the character appeared in, the species of the character, and the spaceships associated with the character. For instance, for the character "Han Solo", the detail view should display the following information:
+
+```
+Name: Han Solo
+Species: Human
+Movies: Episode IV, Episode V, Episode VI, Episode VII
+Spaceships: Millennium Falcon, Imperial shuttle
+Feel free to come up with your own design for this view!
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Further Details
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Project Setup
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+We should be able to start the application using the `npm start` command. The app should use the latest major version of your front-end framework of choice.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### SWAPI
 
-## Learn More
+The Star Wars API should be used to complete this assignment. The most important endpoint will be the `/people` endpoint to query the characters to display in the character list (see [SWAPI Documentation - People](https://swapi.dev/documentation#people)). As the SWAPI does not support filtering the data, it will be necessary to fetch all data and filter on the client side. Make sure not to send unnecessary API requests.
 
-To learn more about Next.js, take a look at the following resources:
+### Character Details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The character details view should make use of the a URL-based router, i.e. each character should be directly reachable through a unique URL, such as `/characters/5` for the character with the ID 5.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### External Libraries
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You are allowed to use any external library to complete this assignment. You are also allowed to use UI libraries. Just make sure that the final app looks appealing, consistent, and has a good user experience.
